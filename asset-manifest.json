@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/craftcode/static/css/main.3716eb3e.css",
+    "main.js": "/craftcode/static/js/main.9fccea80.js",
+    "index.html": "/craftcode/index.html",
+    "main.3716eb3e.css.map": "/craftcode/static/css/main.3716eb3e.css.map",
+    "main.9fccea80.js.map": "/craftcode/static/js/main.9fccea80.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3716eb3e.css",
+    "static/js/main.9fccea80.js"
+  ]
+}
