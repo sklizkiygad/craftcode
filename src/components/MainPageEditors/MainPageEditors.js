@@ -2,8 +2,9 @@ import React, {useEffect} from "react";
 import HtmlEditor from "../HtmlEditor/HtmlEditor";
 import CssEditor from "../CssEditor/CssEditor";
 import JsEditor from "../JsEditor/JsEditor";
+import './MainPageEditors.css';
 
-const mainPageEditors=()=>{
+const MainPageEditors=()=>{
     let cur = null, directionOfMove='';
 
     const divResize=(e,direction)=> {
@@ -51,8 +52,6 @@ const mainPageEditors=()=>{
 
    return (
        <div className="main-page__editors" >
-
-
            <HtmlEditor />
            <CssEditor />
            <JsEditor/>
@@ -60,4 +59,4 @@ const mainPageEditors=()=>{
        </div>
    )
 }
-export default mainPageEditors;
+export default MainPageEditors;

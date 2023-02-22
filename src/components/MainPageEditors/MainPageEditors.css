@@ -1,0 +1,17 @@
+.main-page__editors{
+    display: flex;
+    gap: 10px;
+    height: 40vh;
+    position: relative;
+    padding-bottom: 5px;
+
+}
+
+.main-page__editors__resize {
+    cursor: pointer;
+    height: 5px;
+    background: black;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
