@@ -1,9 +1,9 @@
 .main-page__editors{
     display: flex;
-    gap: 10px;
     height: 40vh;
     position: relative;
     padding-bottom: 5px;
+    justify-content: space-between;
 
 }
 
@@ -14,4 +14,17 @@
     width: 100%;
     position: absolute;
     bottom: 0;
+}
+.editor__content{
+    border: 1px solid black;
+    width: calc(100% - 11px);
+    max-width: calc(100% - 11px);
+    height: calc(100% - 31px);
+    padding: 5px;
+    outline: none;
+    overflow: auto;
+
+}
+.editor__heading{
+    font-size: 20px;
 }
