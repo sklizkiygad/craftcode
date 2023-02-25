@@ -28,10 +28,7 @@ const IframeViewer = () => {
         iframeHead.innerHTML='<style>'+cssData+'</style>';
         // insert styles
 
-        // insert js
-        const iframeScript=iframeRef.current.contentWindow.document.head;
-        iframeScript.innerHTML+='<script>'+jsData+'</script>'
-        // insert js
+
 
         // insert content
         const iframeBody=iframeRef.current.contentWindow.document.body;
@@ -39,7 +36,21 @@ const IframeViewer = () => {
         // insert content
 
 
+        // // insert js
+        // const iframeScript=iframeRef.current.contentWindow.document.body;
+        // iframeScript.append('<script>'+jsData+'</script>')
+        // // insert js
+
+// insert js
+        let script = iframeRef.current.contentWindow.document.createElement('script');
+         script.innerHTML=jsData;
+        script.onload = function() {
+            alert("Script loaded and ready");
+        };
+
+        iframeRef.current.contentWindow.document.getElementsByTagName('body')[0].appendChild(script);
     }
+    // insert js
 
 
 
