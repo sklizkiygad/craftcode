@@ -13,7 +13,6 @@ const CssEditor = () => {
 
 
     const setCssContent=(e)=>{
-
         dispatch(setCssData(cssFormat(e.target.innerHTML)))
     }
 
