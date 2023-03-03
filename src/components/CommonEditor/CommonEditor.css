@@ -1,0 +1,71 @@
+.common-editor{
+    width: 100%;
+    height: calc(100% - 23px);
+}
+.common-editor-tabs{
+    width: 100%;
+}
+.react-tabs__tab-list{
+    display: flex;
+    gap: 10px;
+}
+
+
+
+
+.main-page__editors{
+    display: flex;
+    height: 100%;
+    position: relative;
+    padding-bottom: 5px;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.main-page__editors__resize {
+    cursor: pointer;
+    height: 5px;
+    background: black;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.editor__content{
+    border: 1px solid black;
+    height: 100%;
+    padding: 5px;
+    outline: none;
+    overflow: auto;
+
+}
+.editor__heading{
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.react-tabs{
+    height: 100%;
+}
+
+.react-tabs__tab-panel{
+    height: calc(100% - 23px);
+    display: none;
+}
+
+.react-tabs__tab-panel--selected{
+display: block;
+}
+
+.react-tabs__tab{
+    border: 1px solid black;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.5s;
+}
+
+.react-tabs__tab--selected{
+    background: rgb(185 185 185);
+}

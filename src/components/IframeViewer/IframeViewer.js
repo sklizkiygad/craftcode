@@ -32,7 +32,7 @@ const IframeViewer = () => {
 
         // insert content
         const iframeBody=iframeRef.current.contentWindow.document.body;
-         iframeBody.innerHTML=parse(htmlData)
+         iframeBody.innerHTML=htmlData
         // insert content
 
 
@@ -44,7 +44,7 @@ const IframeViewer = () => {
 // insert js
         let script = iframeRef.current.contentWindow.document.createElement('script');
          script.innerHTML=jsData;
-        script.onload = function() {
+         script.onload = function() {
             alert("Script loaded and ready");
         };
 

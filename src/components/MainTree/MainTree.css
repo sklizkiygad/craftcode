@@ -1,0 +1,44 @@
+.main-tree{
+    min-width: 300px;
+    height: calc(100% - 25px);
+    overflow: auto;
+    padding: 20px 5px 5px 5px;
+}
+
+.main-tree__list__file,
+.main-tree__list__folder__file
+{
+    padding: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.main-tree__list__folder__file{
+    margin-left: 10px;
+}
+
+
+
+.main-tree__list__file:hover,
+.main-tree__list__folder__file:hover
+{
+    background: rgb(185 185 185);
+    border-radius: 5px;
+}
+
+.main-tree__list__folder{
+    cursor: pointer;
+}
+
+.close-folder ul{
+    display: none;
+}
+
+.editor__content__hint{
+    border: none;
+    outline: none;
+    position: absolute;
+    background: rgb(185 185 185);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 2px;
+}
