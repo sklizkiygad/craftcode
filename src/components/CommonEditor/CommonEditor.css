@@ -64,6 +64,7 @@ display: block;
     cursor: pointer;
     padding: 5px 10px;
     transition: 0.5s;
+    outline: none;
 }
 
 .react-tabs__tab--selected{

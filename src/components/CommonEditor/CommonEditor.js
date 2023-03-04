@@ -12,6 +12,7 @@ import {
 import expand,{extract} from 'emmet';
 import {offset, position} from "caret-pos";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
+import {text} from "@fortawesome/fontawesome-svg-core";
 
 
 const CommonEditor = () => {
@@ -25,7 +26,7 @@ const CommonEditor = () => {
 
     const[currentCodeEditor,setCurrentCodeEditor]=useState(null)
 
-    const [currentTypeOfDocument,setCurrentTypeOfDocument]=useState('html')
+    const [currentTypeOfDocument,setCurrentTypeOfDocument]=useState('')
 
 
 
@@ -33,17 +34,38 @@ const CommonEditor = () => {
     const tabsData=useSelector(tabsDataSelector)
     const dispatch=useDispatch();
 
+    useEffect(()=>{
+        console.log(currentCodeEditor)
+    },[currentCodeEditor])
+
 
 
 
 
     const  emmitFormat = ()=>{
-            const source = codeTextInEditor.trim();
-            const data = extract(source, offset(currentCodeEditor).position);
+
+            const source = codeTextInEditor;
+            const data =  extract(source, position(currentCodeEditor).pos);
         if(data){
             data.abbreviation? setCurrentCountLastLetter(data.abbreviation.length):setCurrentCountLastLetter(0)
             try{
-                return expand(data.abbreviation)
+                switch (currentTypeOfDocument) {
+                    case "html":
+                        console.log(currentTypeOfDocument)
+                        return expand(data.abbreviation)
+
+                    case "css":
+                        return expand(data.abbreviation,{ type: 'stylesheet' })
+
+                    case "js":
+                        return expand(data.abbreviation,{syntax: 'script'})
+
+                    default:
+                        return expand(data.abbreviation)
+
+
+                }
+
             }
             catch (e) {
                 console.log(e)
@@ -52,22 +74,27 @@ const CommonEditor = () => {
         else{
             return ''
         }
-
-
     }
+
+
 
 
 
     const insertHint=()=>{
        let textInEditor=codeTextInEditor
-       textInEditor=textInEditor.substring(0,textInEditor.length-currentCountLastLetter)
-       currentCodeEditor.innerText=textInEditor+hint
-       setHint('')
+
+        console.log(position(currentCodeEditor).pos)
+
+
+        textInEditor=textInEditor.substring(0,position(currentCodeEditor).pos-currentCountLastLetter)+hint+textInEditor.substring(position(currentCodeEditor).pos)
+
+
+         currentCodeEditor.innerText=textInEditor
+         setCodeTextInEditor(textInEditor)
+        setHint('')
     }
 
     const addBr=(e)=>{
-
-
         if(e.keyCode === 13){
            e.preventDefault();
            document.execCommand('insertHTML', false, '<br class="brToDelete"><br>');
@@ -80,8 +107,8 @@ const CommonEditor = () => {
     //css
     const cssData=useSelector(cssDataSelector);
     const cssFormat=(e)=>e.replace(/(<([^>]+)>)/gi, '');
-    const setCssContent=(e)=>{
-        dispatch(setCssData(cssFormat(e.target.innerHTML)))
+    const setCssContent=()=>{
+        dispatch(setCssData(cssFormat(codeTextInEditor)))
     }
     //css
 
@@ -90,8 +117,8 @@ const CommonEditor = () => {
 
 
     const jsFormat=(e)=>e.replace(/(<br class="brToDelete">)/g, "");
-    const setJsContent=(e)=>{
-        dispatch(setJsData(jsFormat(e.target.innerText)))
+    const setJsContent=()=>{
+        dispatch(setJsData(jsFormat(codeTextInEditor)))
     }
     //js
 
@@ -100,24 +127,17 @@ const CommonEditor = () => {
     const htmlData=useSelector(htmlDataSelector);
     const htmlFormat=()=>codeTextInEditor.replace(/(<br class="brToDelete">)/g, "");
     const setHtmlContent=()=>{
-
-        console.log(codeTextInEditor)
-
-
-
         dispatch(setHtmlData(codeTextInEditor))
     }
 
     //html
 
     useEffect(()=>{
-        console.log('dd')
+        getCurrentTabPanel();
     },[tabsData])
 
 
     const setCodeContent=()=>{
-
-       // setCaretPosition(offset(editorRef.current));
         switch (currentTypeOfDocument) {
             case 'html':
                 setHtmlContent();
@@ -134,19 +154,17 @@ const CommonEditor = () => {
             default:
                 break;
         }
-
-
     }
 
 
     useEffect(()=>{
+
 
         if(currentCodeEditor){
             setHint('')
             setHintStyle({top:offset(currentCodeEditor).top+10,left:offset(currentCodeEditor).left})
             setHint(emmitFormat())
         }
-
 
         const timer = setTimeout( () => {
             setCodeContent()
@@ -156,20 +174,18 @@ const CommonEditor = () => {
     },[codeTextInEditor])
 
     const getCurrentTabPanel=()=>{
-     setCurrentCodeEditor(document.querySelector('.react-tabs__tab-panel--selected > .common-editor > .editor__content'))
+        setHint('')
+        if (!currentTypeOfDocument && tabsData.length){
+           setCurrentTypeOfDocument(tabsData[0].type)
+        }
+        setTimeout(()=>{
+            setCurrentCodeEditor(document.querySelector('.react-tabs__tab-panel--selected > .common-editor > .editor__content'))
+        },0)
+
+
     }
 
     return (
-
-        // <div className="common-editor">
-        //     <h4 className="editor__heading">{typeOfDocument}</h4>
-        //     <div ref={editorRef}  className="editor__content" contentEditable onKeyDown={addBr} onKeyUp={e=>setCodeTextInEditor(e.target.innerText)}/>
-        //
-        //     {hint &&
-        //     <button style={hintStyle} onClick={insertHint} className="editor__content__hint">{hint}</button>
-        //     }
-        //
-        // </div>
         <div className="common-editor-tabs">
             <Tabs onSelect={() => getCurrentTabPanel()}>
                 <TabList>
