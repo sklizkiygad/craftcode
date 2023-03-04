@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/sklizkiygad/craftcode.git/static/css/main.1803d6cc.css",
-    "main.js": "/sklizkiygad/craftcode.git/static/js/main.fccf039f.js",
-    "index.html": "/sklizkiygad/craftcode.git/index.html",
-    "main.1803d6cc.css.map": "/sklizkiygad/craftcode.git/static/css/main.1803d6cc.css.map",
-    "main.fccf039f.js.map": "/sklizkiygad/craftcode.git/static/js/main.fccf039f.js.map"
+    "main.css": "/craftcode/static/css/main.1803d6cc.css",
+    "main.js": "/craftcode/static/js/main.fccf039f.js",
+    "index.html": "/craftcode/index.html",
+    "main.1803d6cc.css.map": "/craftcode/static/css/main.1803d6cc.css.map",
+    "main.fccf039f.js.map": "/craftcode/static/js/main.fccf039f.js.map"
   },
   "entrypoints": [
     "static/css/main.1803d6cc.css",
