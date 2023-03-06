@@ -29,7 +29,7 @@ const MainTree = () => {
                  id: "1",
                  name: "css",
                  children: [
-                     { id: "css1", name: "style.css", type:'css', content:''},
+                     { id: "css1", name: "style.css", type:'css', content:cssData},
                  ],
              },
 
@@ -37,7 +37,7 @@ const MainTree = () => {
             id: "2",
             name: "js",
             children: [
-                { id: "js1", name: "script.js",type:'js', content: '' },
+                { id: "js1", name: "script.js",type:'js', content: jsData },
             ],
         },
         {id: "3", name: "index.html", type:'html', content:htmlData},

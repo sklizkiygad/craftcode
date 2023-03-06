@@ -12,53 +12,42 @@ import {
 import expand,{extract} from 'emmet';
 import {offset, position} from "caret-pos";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
-import {text} from "@fortawesome/fontawesome-svg-core";
+import Editor from "react-simple-code-editor";
+
+
+
+
 
 
 const CommonEditor = () => {
-
-
     const [hint,setHint]=useState('')
     const [hintStyle,setHintStyle]=useState({top:0,left:0})
     const [currentCountLastLetter,setCurrentCountLastLetter]=useState(0)
     const [codeTextInEditor,setCodeTextInEditor]=useState('')
     const [caretPosition,setCaretPosition]=useState(null)
-
     const[currentCodeEditor,setCurrentCodeEditor]=useState(null)
-
     const [currentTypeOfDocument,setCurrentTypeOfDocument]=useState('')
-
-
-
 
     const tabsData=useSelector(tabsDataSelector)
     const dispatch=useDispatch();
 
-    useEffect(()=>{
-        console.log(currentCodeEditor)
-    },[currentCodeEditor])
-
-
-
-
 
     const  emmitFormat = ()=>{
-
-            const source = codeTextInEditor;
-            const data =  extract(source, position(currentCodeEditor).pos);
+        let source = codeTextInEditor.replace('<br class="brToDelete">', ' ');
+        source = source.replace('<br>', ' ');
+          const  data =  extract(source, position(currentCodeEditor).pos);
         if(data){
-            data.abbreviation? setCurrentCountLastLetter(data.abbreviation.length):setCurrentCountLastLetter(0)
+            setCurrentCountLastLetter(data.abbreviation.length)
             try{
                 switch (currentTypeOfDocument) {
                     case "html":
-                        console.log(currentTypeOfDocument)
                         return expand(data.abbreviation)
 
                     case "css":
                         return expand(data.abbreviation,{ type: 'stylesheet' })
 
                     case "js":
-                        return expand(data.abbreviation,{syntax: 'script'})
+                        return ''
 
                     default:
                         return expand(data.abbreviation)
@@ -82,25 +71,23 @@ const CommonEditor = () => {
 
     const insertHint=()=>{
        let textInEditor=codeTextInEditor
-
-        console.log(position(currentCodeEditor).pos)
-
-
         textInEditor=textInEditor.substring(0,position(currentCodeEditor).pos-currentCountLastLetter)+hint+textInEditor.substring(position(currentCodeEditor).pos)
-
-
-         currentCodeEditor.innerText=textInEditor
+        currentCodeEditor.innerHTML=''
+         currentCodeEditor.append(textInEditor)
+        console.log(textInEditor)
          setCodeTextInEditor(textInEditor)
         setHint('')
     }
 
     const addBr=(e)=>{
         if(e.keyCode === 13){
-           e.preventDefault();
-           document.execCommand('insertHTML', false, '<br class="brToDelete"><br>');
-           return false
+            e.preventDefault()
+            document.execCommand('insertHTML', true, '\n');
        }
-
+        if(e.keyCode === 9){
+            e.preventDefault();
+            insertHint();
+        }
     }
 
 
@@ -158,8 +145,6 @@ const CommonEditor = () => {
 
 
     useEffect(()=>{
-
-
         if(currentCodeEditor){
             setHint('')
             setHintStyle({top:offset(currentCodeEditor).top+10,left:offset(currentCodeEditor).left})
@@ -182,8 +167,51 @@ const CommonEditor = () => {
             setCurrentCodeEditor(document.querySelector('.react-tabs__tab-panel--selected > .common-editor > .editor__content'))
         },0)
 
-
     }
+
+
+    const lang = {
+        js: {
+            equa: /(\b=\b)/g,
+            quot: /(`|'|"|&#39;|&#34;)/g,
+            comm: /((\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/)|(\/\/.*))/g,
+            logi: /(%=|%|\-|\+|\*|&amp;{1,2}|\|{1,2}|&lt;=|&gt;=|&lt;|&gt;|!={1,2}|={2,3})/g,
+            numb: /(\d+(\.\d+)?(e\d+)?)/g,
+            func: /(?<=^|\s*)(async|console|alert|Math|Object|Array|String|class(?!\s*\=)|function|(?<=\.)\D\w*)(?=\b)/g,
+            decl: /(?<=^|\s*)(var|let|const)/g, // Declarations
+            pare: /(\(|\))/g,
+            squa: /(\[|\])/g,
+            curl: /(\{|\})/g,
+        },
+        // Props order matters! Here I rely on "tags:"
+        // being already applied in the previous iteration
+        html: {
+            tags: /(?<=&lt;(?:\/)?)(\w+)(?=\s|\&gt;)/g,
+            angl: /(&lt;\/?|&gt;)/g,
+            attr: /((?<=<i class=html_tags>\w+<\/i>)[^<]+)/g,
+        }
+    };
+
+    const highLite = el => {
+        const dataLang = el.dataset.lang; // Detect "js", "html", "py", "bash", ...
+        const langObj = lang[dataLang]; // Extract object from lang regexes dictionary
+        let html = el.innerHTML;
+        Object.keys(langObj).forEach(function(key) {
+            html = html.replace(langObj[key], `<i class=${dataLang}_${key}>$1</i>`);
+        });
+        el.previousElementSibling.innerHTML = html; // Finally, show highlights!
+    };
+
+    const editors = document.querySelectorAll(".highLite_editable");
+    editors.forEach(el => {
+        el.contentEditable = true;
+        el.spellcheck = false;
+        el.autocorrect = "off";
+        el.autocapitalize = "off";
+        el.addEventListener("input", highLite.bind(null, el));
+        el.addEventListener("input", highLite.bind(null, el));
+        highLite(el); // Init!
+    });
 
     return (
         <div className="common-editor-tabs">
@@ -199,10 +227,26 @@ const CommonEditor = () => {
                 tabsData.map((item,index)=>{
                         return (<TabPanel key={index}>
                         <div className="common-editor">
-                            <div  className="editor__content" contentEditable onKeyDown={addBr} onKeyUp={e=>setCodeTextInEditor(e.target.innerText)}/>
+
+                            {/*<pre  className="editor__content" contentEditable onKeyDown={addBr} onKeyUp={e=>setCodeTextInEditor(e.target.innerText)}>*/}
+
+                            {/*</pre>*/}
+
+                            <div className="highLite">
+                                <div className="highLite_colors"></div>
+                                <div className="highLite_editable" data-lang="html" onKeyUp={e=>setCodeTextInEditor(e.target.innerText)}>&lt;h2 class="head"&gt;
+                                    TODO: HTML is for &lt;b&gt;homework&lt;/b&gt;
+                                    &lt;/h2&gt;</div>
+                            </div>
+
+
+
+
+
                             {hint &&
                             <button style={hintStyle} onClick={insertHint} className="editor__content__hint">{hint}</button>
                             }
+
                         </div>
                     </TabPanel>)
                 })}
