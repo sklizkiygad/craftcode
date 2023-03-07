@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/craftcode/static/css/main.9312143e.css",
-    "main.js": "/craftcode/static/js/main.57c5ad7b.js",
+    "main.css": "/craftcode/static/css/main.1877e8ee.css",
+    "main.js": "/craftcode/static/js/main.62f55055.js",
     "index.html": "/craftcode/index.html",
-    "main.9312143e.css.map": "/craftcode/static/css/main.9312143e.css.map",
-    "main.57c5ad7b.js.map": "/craftcode/static/js/main.57c5ad7b.js.map"
+    "main.1877e8ee.css.map": "/craftcode/static/css/main.1877e8ee.css.map",
+    "main.62f55055.js.map": "/craftcode/static/js/main.62f55055.js.map"
   },
   "entrypoints": [
-    "static/css/main.9312143e.css",
-    "static/js/main.57c5ad7b.js"
+    "static/css/main.1877e8ee.css",
+    "static/js/main.62f55055.js"
   ]
 }
