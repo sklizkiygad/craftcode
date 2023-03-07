@@ -3,7 +3,7 @@
     height: calc(100% - 12px);
 }
 .common-editor-tabs{
-    width: 100%;
+    flex: 1 1 auto;
 }
 .react-tabs__tab-list{
     display: flex;

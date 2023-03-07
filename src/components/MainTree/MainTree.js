@@ -43,6 +43,10 @@ const MainTree = () => {
         {id: "3", name: "index.html", type:'html', content:htmlData},
     ];
 
+    // useEffect(()=>{
+    //     dispatch(setTreeData(currentDataTree))
+    // },[currentDataTree])
+
     useEffect(()=>{
         dispatch(setTreeData(currentDataTree))
     },[])
