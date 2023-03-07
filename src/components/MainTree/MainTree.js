@@ -11,6 +11,7 @@ import {
     setTreeData, tabsDataSelector,
     treeDataSelector
 } from "../../redux/slices/codeSlice";
+import {faCss3, faHtml5, faJs} from "@fortawesome/free-brands-svg-icons";
 
 const MainTree = () => {
 
@@ -67,6 +68,26 @@ const MainTree = () => {
         dispatch(setTabsData(e))
     }
 
+    const getIconForItem=(e)=>{
+        switch (e) {
+            case "html":
+                return <FontAwesomeIcon icon={faHtml5} />
+
+            case "css":
+                return <FontAwesomeIcon icon={faCss3} />
+
+            case "js":
+               return <FontAwesomeIcon icon={faJs} />
+
+            default:
+               return <FontAwesomeIcon icon={faFile}/>
+
+
+        }
+
+
+    }
+
     return (
         <div className="main-tree">
             <ul className="main-tree__list">
@@ -75,13 +96,21 @@ const MainTree = () => {
                         return <li className="main-tree__list__folder" onClick={closeFolder} key={item.id}>
                             <FontAwesomeIcon icon={faFolderBlank} /> {item.name}
                         <ul>{item.children.map((subItem)=>{
-                            return <li className="main-tree__list__folder__file" onClick={()=>addTabFile(subItem)} key={subItem.id}><FontAwesomeIcon icon={faFile}/> {subItem.name}</li>
+                            return <li className="main-tree__list__folder__file"
+                                       onClick={()=>addTabFile(subItem)}
+                                       key={subItem.id}>
+                                {getIconForItem(subItem.type)} {subItem.name}
+                            </li>
                         })}
                         </ul>
                         </li>
                     }
                     else{
-                        return <li className="main-tree__list__file" onClick={()=>addTabFile(item)} key={item.id}><FontAwesomeIcon icon={faFile}/> {item.name}</li>
+                        return <li className="main-tree__list__file"
+                                   onClick={()=>addTabFile(item)}
+                                   key={item.id}>
+                            {getIconForItem(item.type)} {item.name}
+                        </li>
                     }
 
                 })}

@@ -46,6 +46,8 @@
 
 .react-tabs{
     height: 100%;
+    width: 100%;
+    background: #434343;
 }
 
 .react-tabs__tab-panel{
@@ -58,7 +60,7 @@ display: block;
 }
 
 .react-tabs__tab{
-    border: 1px solid black;
+    border: 1px solid rgb(34, 34, 34);
     border-radius: 5px 5px 0 0;
     border-bottom: none;
     cursor: pointer;
@@ -68,64 +70,15 @@ display: block;
 }
 
 .react-tabs__tab--selected{
-    background: rgb(185 185 185);
-}
-
-.highLite {
-    position: relative;
-    background: hsl(220, 16%, 14%);
-    height: 100%;
-}
-
-.highLite_colors,
-.highLite_editable {
-    padding: 16px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    background: rgb(34, 34, 34);
     color: white;
-    white-space: pre-wrap;
-    font-family: monospace;
-    font-size: 13px;
-}
-.highLite_editable {
-    position: relative;
-    -webkit-text-fill-color: transparent; /* Chrome: make text transparent */
-    text-fill-color: transparent; /* One day, hopefully? */
-    color: hsl(100, 95%, 95%); /* But keep caret colored */
-    height: calc(100% - 35px);
-    overflow: auto;
 
 }
-.highLite_editable:focus {
-    outline: 1px solid hsl(220, 16%, 19%);
+.common-editor pre, .npm__react-simple-code-editor__textarea{
+    word-break: break-all !important;
 }
 
-/* THE UNDERLAYING ONE WITH HIGHLIGHT COLORS */
-.highLite_colors {
-    position: absolute;
-    user-select: none;
+.npm__react-simple-code-editor__textarea{
+    border:none ;
+    outline:none
 }
-
-.highLite_colors i {
-    font-style: normal;
-}
-
-/* JS */
-i.js_quot { color: hsl( 50, 75%, 70%); }
-i.js_decl { color: hsl(200, 75%, 70%); }
-i.js_func { color: hsl(300, 75%, 70%); }
-i.js_pare { color: hsl(210, 75%, 70%); }
-i.js_squa { color: hsl(230, 75%, 70%); }
-i.js_curl { color: hsl(250, 75%, 70%); }
-i.js_numb { color: hsl(100, 75%, 70%); }
-i.js_logi { color: hsl(200, 75%, 70%); }
-i.js_equa { color: hsl(200, 75%, 70%); }
-i.js_comm { color: hsl(200, 10%, 45%); font-style: italic; }
-i.js_comm > * { color: inherit; }
-
-/* HTML */
-i.html_angl { color: hsl(200, 10%, 45%); }
-i.html_tags { color: hsl(  0, 75%, 70%); }
-i.html_attr { color: hsl(200, 74%, 70%); }

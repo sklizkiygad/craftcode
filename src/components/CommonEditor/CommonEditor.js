@@ -18,7 +18,7 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-javascript';
-//import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-css';
 import 'prismjs/themes/prism-twilight.css'; //Example style, you can use another
 
 
@@ -166,7 +166,11 @@ const CommonEditor = () => {
 
     },[codeTextInEditor])
 
+
+
     const getCurrentTabPanel=(e)=>{
+
+
         if (!currentTypeOfDocument && tabsData.length){
            setCurrentTypeOfDocument(tabsData[0].type)
         }
@@ -177,23 +181,26 @@ const CommonEditor = () => {
         switch (e) {
             case "html":
                 return languages.markup
-                break;
+
             case "css":
                 return languages.css
-                break;
+
             case "js":
                 return languages.js
-                break;
+
             default:
                 return languages.markup
-                break;
-
 
         }
+
+
 
     }
 
 
+    useEffect(()=>{
+        setCodeTextInEditor('')
+    },[currentTypeOfDocument])
 
 
 
@@ -202,7 +209,7 @@ const CommonEditor = () => {
 
     return (
         <div className="common-editor-tabs">
-            <Tabs onSelect={() => getCurrentTabPanel()}>
+            <Tabs onChange={() => getCurrentTabPanel()}>
                 <TabList>
                     {
                         tabsData.map((item,index)=>{
@@ -237,13 +244,13 @@ const CommonEditor = () => {
                                 highlight={code => highlight(code,getCurrentTabPanel(item.type))}
                                 padding={10}
                                 style={{
-                                    fontFamily: '"Fira code", "Fira Mono", monospace',
+                                    // fontFamily: '"Fira code", "Fira Mono", monospace',
                                     fontSize: 15,
                                     background: "#222222",
                                     color:"white",
                                     height:"100%",
+                                    wordBreak:"break-all",
 
-                                    wordBreak:"break-all"
                                 }}
                             />
 

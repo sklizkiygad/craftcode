@@ -3,6 +3,9 @@
     height: calc(100% - 25px);
     overflow: auto;
     padding: 20px 5px 5px 5px;
+    background: #434343;
+    color: white;
+
 }
 
 .main-tree__list__file,

@@ -5,7 +5,23 @@
     font-family: 'Montserrat', sans-serif;
 
 
+
 }
 li{
     list-style-type: none;
 }
+
+
+
+::-webkit-scrollbar {
+    width: 10px; /* ширина для вертикального скролла */
+    background-color: #525151;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background: black;
+
+
+}
+
