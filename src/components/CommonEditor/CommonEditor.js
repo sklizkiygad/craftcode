@@ -24,8 +24,6 @@ import 'prismjs/themes/prism-twilight.css'; //Example style, you can use another
 
 
 
-
-
 const CommonEditor = () => {
     const [hint,setHint]=useState('')
     const [hintStyle,setHintStyle]=useState({top:0,left:0})
@@ -264,6 +262,8 @@ const CommonEditor = () => {
 
 
             </Tabs>
+
+
 
 
         </div>
