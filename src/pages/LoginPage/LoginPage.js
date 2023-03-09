@@ -10,10 +10,10 @@ const LoginPage = () => {
             </div>
 
             <form className="login-page__form" >
-                <h3>Login Here</h3>
+                <h3>Авторизация</h3>
 
                 <label className="login-page__form__label" htmlFor="email">Email</label>
-                <input className="login-page__form__input" type="text" placeholder="Email" id="email" required/>
+                <input className="login-page__form__input" type="email" placeholder="Email" id="email" required/>
 
                     <label className="login-page__form__label" htmlFor="password">Пароль</label>
                     <input className="login-page__form__input" type="password" placeholder="Пароль" id="password" required/>
