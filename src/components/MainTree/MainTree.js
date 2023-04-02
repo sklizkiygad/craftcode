@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './MainTree.css';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -6,12 +6,15 @@ import {faFile, faFolderBlank} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {
     cssDataSelector,
-    htmlDataSelector,
-    jsDataSelector, setTabsData,
+    htmlDataSelector, isOpenModalSelector,
+    jsDataSelector, setIsOpenModal, setTabsData,
     setTreeData, tabsDataSelector,
-    treeDataSelector
+    treeDataSelector, typeOfSelectedProjectSelector
 } from "../../redux/slices/codeSlice";
 import {faCss3, faHtml5, faJs} from "@fortawesome/free-brands-svg-icons";
+import useChangeDiv from "../../utils/changeDivFunction";
+import Modal from "../Modal/Modal";
+import TemplatesSelect from "../TemplatesSelect/TemplatesSelect";
 
 const MainTree = () => {
 
@@ -21,18 +24,19 @@ const MainTree = () => {
     const jsData=useSelector(jsDataSelector)
     const treeData=useSelector(treeDataSelector)
     const tabsData=useSelector(tabsDataSelector)
+    const typeOfSelectedProject=useSelector(typeOfSelectedProjectSelector)
 
+    const isOpenModal=useSelector(isOpenModalSelector)
     const dispatch=useDispatch()
 
-
-    const currentDataTree = [
+    const currentDataTreeVanilla = [
         {
-                 id: "1",
-                 name: "css",
-                 children: [
-                     { id: "css1", name: "style.css", type:'css', content:cssData},
-                 ],
-             },
+            id: "1",
+            name: "css",
+            children: [
+                { id: "css1", name: "style.css", type:'css', content:cssData},
+            ],
+        },
 
         {
             id: "2",
@@ -44,13 +48,37 @@ const MainTree = () => {
         {id: "3", name: "index.html", type:'html', content:htmlData},
     ];
 
+    const currentDataTreeStatic = [
+
+        {id: "1", name: "index.html", type:'html', content:htmlData},
+    ];
+
+
+    const [currentDataTree,setCurrentDataTree] =useState([]) ;
+
     // useEffect(()=>{
     //     dispatch(setTreeData(currentDataTree))
     // },[currentDataTree])
 
     useEffect(()=>{
-        dispatch(setTreeData(currentDataTree))
-    },[])
+        if(!typeOfSelectedProject){
+            dispatch(setIsOpenModal(true))
+
+        }else{
+            switch (typeOfSelectedProject) {
+                case 'vanilla':
+                    dispatch(setTreeData(currentDataTreeVanilla))
+                    break
+                case 'static':
+                    dispatch(setTreeData(currentDataTreeStatic))
+                    break
+            }
+        }
+
+
+
+
+    },[typeOfSelectedProject])
 
     const closeFolder=(e)=>{
 
@@ -84,17 +112,26 @@ const MainTree = () => {
 
 
         }
-
-
     }
+
+
+    const [divResize]=useChangeDiv()
 
     return (
         <div className="main-tree">
+            {isOpenModal &&
+            <Modal>
+                <TemplatesSelect/>
+            </Modal>
+            }
+
             <ul className="main-tree__list">
+
                 {treeData.map((item)=>{
                     if(item.children){
                         return <li className="main-tree__list__folder" onClick={closeFolder} key={item.id}>
                             <FontAwesomeIcon icon={faFolderBlank} /> {item.name}
+
                         <ul>{item.children.map((subItem)=>{
                             return <li className="main-tree__list__folder__file"
                                        onClick={()=>addTabFile(subItem)}
@@ -103,6 +140,7 @@ const MainTree = () => {
                             </li>
                         })}
                         </ul>
+
                         </li>
                     }
                     else{
@@ -115,6 +153,9 @@ const MainTree = () => {
 
                 })}
             </ul>
+            <div className="main-tree__editors__resize" onMouseDown={e=>divResize(e,'horizontal')}/>
+
+
         </div>
     );
 };

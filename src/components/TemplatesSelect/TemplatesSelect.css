@@ -1,0 +1,82 @@
+.templates-select{
+    background: #121212;
+    padding: 20px;
+    width:630px
+}
+
+@media (max-width: 650px) {
+    .templates-select{
+        width: calc(100% - 40px);
+    }
+}
+
+.templates-select__head{
+    color: white;
+    margin-bottom: 15px ;
+}
+
+.templates-select__list{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.templates-select__list__item{
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    background: #2f2f2f;
+    flex:0 0 29%;
+    height: 80px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+@media (max-width: 650px) {
+
+
+    .templates-select__list{
+        flex-direction: column;
+    }
+}
+
+.templates-select__list__item svg{
+    font-size: 45px;
+}
+
+.html-brand, .js-brand, .react-brand, .vue-brand, .angular-brand{
+    transition: 0.5s;
+}
+
+.templates-select__list__item:hover .html-brand{
+    color: #e44d26;
+
+}
+
+.templates-select__list__item:hover .js-brand{
+    color: #e8cc19;
+
+}
+
+.templates-select__list__item:hover .react-brand{
+    color: #62d8f8;
+
+}
+
+.templates-select__list__item:hover .vue-brand{
+    color: #4cbb89;
+
+}
+
+.templates-select__list__item:hover .angular-brand{
+    color: #db1b15;
+
+}
+
+

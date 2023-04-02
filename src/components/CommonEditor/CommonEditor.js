@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './CommonEditor.css';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    cssDataSelector,
+    cssDataSelector, deleteTabsData,
     htmlDataSelector,
     jsDataSelector,
     setCssData,
@@ -19,7 +19,9 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
-import 'prismjs/themes/prism-twilight.css'; //Example style, you can use another
+import 'prismjs/themes/prism-twilight.css';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"; //Example style, you can use another
 
 
 
@@ -54,7 +56,7 @@ const CommonEditor = () => {
                         return expand(data.abbreviation,{ type: 'stylesheet' })
 
                     case "js":
-                        return ''
+                        return expand(data.abbreviation,{ type: 'javascript' })
 
                     default:
                         return expand(data.abbreviation)
@@ -196,6 +198,17 @@ const CommonEditor = () => {
     }
 
 
+
+
+        const deleteTab =(e)=>{
+
+        dispatch(deleteTabsData(e.id))
+
+
+
+        }
+
+
     useEffect(()=>{
         setCodeTextInEditor('')
     },[currentTypeOfDocument])
@@ -211,7 +224,7 @@ const CommonEditor = () => {
                 <TabList>
                     {
                         tabsData.map((item,index)=>{
-                        return <Tab onClick={()=>setCurrentTypeOfDocument(item.type)} key={index}>{item.name}</Tab>
+                        return <Tab onClick={()=>setCurrentTypeOfDocument(item.type)} key={index}>{item.name} <FontAwesomeIcon icon={faXmark} onClick={()=>deleteTab(item)}/></Tab>
                     })}
                 </TabList>
 
