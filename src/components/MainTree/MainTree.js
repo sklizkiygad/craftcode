@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './MainTree.css';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFile, faFolderBlank} from "@fortawesome/free-solid-svg-icons";
+import {faFile, faFileCirclePlus, faFolderBlank, faFolderPlus} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {
     cssDataSelector,
@@ -119,6 +119,9 @@ const MainTree = () => {
 
     return (
         <div className="main-tree">
+
+            <div className="main-tree__create-icons"><FontAwesomeIcon icon={faFolderPlus} /> <FontAwesomeIcon icon={faFileCirclePlus} /></div>
+
             {isOpenModal &&
             <Modal>
                 <TemplatesSelect/>

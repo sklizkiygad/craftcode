@@ -1,12 +1,16 @@
 .main-tree{
     min-width: 220px;
-    height: calc(100% - 25px);
+    height: calc(100% - 5px);
     overflow: auto;
-    padding: 20px 5px 5px 5px;
+    /*padding: 20px 5px 5px 5px;*/
     background: #434343;
     color: white;
     position: relative;
 
+}
+
+.main-tree__list{
+    margin: 10px 5px;
 }
 
 .main-tree__list__file,
@@ -56,4 +60,16 @@
     right: 0;
     bottom: 0;
     top: 0;
+}
+
+.main-tree__create-icons{
+    display: flex;
+    padding: 5px 10px;
+    background: #1f1f1f;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.main-tree__create-icons svg {
+    cursor: pointer;
 }
