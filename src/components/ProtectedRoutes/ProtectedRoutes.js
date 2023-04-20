@@ -29,7 +29,7 @@ export const ProtectedRoutes = () => {
     },[])
     return(
 
-            isUserAuth? <Outlet/>: <Navigate to="/login"/>
+            isUserAuth? <Outlet/>: <Navigate to="/welcome"/>
 
     )
 
