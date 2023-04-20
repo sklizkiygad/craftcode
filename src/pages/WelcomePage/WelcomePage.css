@@ -369,7 +369,7 @@ font-size: 12vw;
 
 .welcome-page__main-info__text .container .text1{
     color: #fff;
-    font-size: 60px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 8px;
     margin-bottom: 20px;
@@ -390,7 +390,7 @@ font-size: 12vw;
 
 .welcome-page__main-info__text .container .text2{
     color: cadetblue;
-    font-size: 30px;
+    font-size: 20px;
     padding: 0 10px;
     text-align: left;
 }

@@ -179,7 +179,8 @@
       z-index: 2;
       position: absolute;
       left: $contentLeft;
-      top: $contentTop;
+
+      bottom: 55px;
 
     }
 
@@ -766,5 +767,19 @@ $cubOut: cubic-bezier(.67,-0.16,.47,1.61);
         transform: rotate(-45deg) scaleX(0) translateZ(0);
       }
     }
+  }
+}
+
+@media(max-width:772px){
+  .fnc-slide__inner{
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .fnc-slide__content{
+    left:0;
+  }
+  .fnc-slide__heading-line{
+    font-size: 60px;
   }
 }
