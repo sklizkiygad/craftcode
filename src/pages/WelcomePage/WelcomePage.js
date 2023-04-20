@@ -233,7 +233,7 @@ const WelcomePage = () => {
 
         window.fncSlider = fncSlider;
 
-        fncSlider(".example-slider", {autoSlidingDelay: 400000});
+        fncSlider(".example-slider", {autoSlidingDelay: 4000});
 
         let $demoCont = document.querySelector(".demo-cont");
 
