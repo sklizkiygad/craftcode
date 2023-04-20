@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/craftcode/static/css/main.a9ac61c1.css",
-    "main.js": "/craftcode/static/js/main.d12581e1.js",
+    "main.js": "/craftcode/static/js/main.4feab1ac.js",
     "static/media/circle.gif": "/craftcode/static/media/circle.3fba3803cae7ef7d464e.gif",
     "static/media/s4.gif": "/craftcode/static/media/s4.7f9c2c58eadb9c57b56c.gif",
     "static/media/s3.gif": "/craftcode/static/media/s3.5d302dfd0a6264f68643.gif",
@@ -26,10 +26,10 @@
     "static/media/codepen.png": "/craftcode/static/media/codepen.3e23647035ec185a86ff.png",
     "index.html": "/craftcode/index.html",
     "main.a9ac61c1.css.map": "/craftcode/static/css/main.a9ac61c1.css.map",
-    "main.d12581e1.js.map": "/craftcode/static/js/main.d12581e1.js.map"
+    "main.4feab1ac.js.map": "/craftcode/static/js/main.4feab1ac.js.map"
   },
   "entrypoints": [
     "static/css/main.a9ac61c1.css",
-    "static/js/main.d12581e1.js"
+    "static/js/main.4feab1ac.js"
   ]
 }
